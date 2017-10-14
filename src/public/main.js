@@ -1,8 +1,10 @@
 const API_KEY = 'AIzaSyBzCZj4CClZrS-BOkmVqD5tmN-poIpivBc'
 
+_ = key => document.getElementById(key)
 // references
-const popUp = document.getElementById('popUp')
-const mask = document.getElementById('mask')
+const popUp = _('popUp')
+const mask = _('mask')
+const formSubmit = _('formSubmit')
 
 init = () => { 
     // eslint-disable-next-line
@@ -43,6 +45,17 @@ addButton.addEventListener('click', (e) => {
 })
 
 mask.addEventListener('click', (e) => {
-    e.preventDefault();
     closeDialog();
+})
+
+formSubmit.addEventListener('click', (e) => {
+    e.preventDefault()
+    closeDialog();
+    fetch(_('url').value)
+        .then((response) => {
+            response.json()
+                .then(parsed => console.log(parsed))
+                .catch(e => console.error(e));
+        })
+        .catch(e => console.error(e));
 })
