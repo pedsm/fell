@@ -1,5 +1,9 @@
 const API_KEY = 'AIzaSyBzCZj4CClZrS-BOkmVqD5tmN-poIpivBc'
 
+// references
+const popUp = document.getElementById('popUp')
+const mask = document.getElementById('mask')
+
 init = () => { 
     // eslint-disable-next-line
     let map
@@ -21,4 +25,8 @@ init = () => {
             }
         })
     }, e => console.log(e))
+}
+
+openDialog = () => {
+    
 }

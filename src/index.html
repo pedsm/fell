@@ -1,29 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>fell</title>
-    <link rel="stylesheet" href="public/main.css">
-
-    <script 
-        async defer
-        src="http://maps.google.com/maps/api/js?key=AIzaSyAvI1of8u5aDRBmUSDAsLPy6BfUtAx5Lws&callback=init" 
-    >
-        let init = () => {}
-    </script>
-    <script src="public/gmaps.min.js"></script>
-</head>
-<body>
-    <div id="left">
-        <h1>fell</h1> 
-        <nav>
-            <p>Add</p>
-            <p>View</p>
-        </nav>
-    </div>
-    <div id="right">
-        <div id="map"/>
-    </div>
-    <script src="public/main.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>fell</title>
+        <link rel="stylesheet" href="public/main.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script
+                               async defer
+                               src="http://maps.google.com/maps/api/js?key=AIzaSyAvI1of8u5aDRBmUSDAsLPy6BfUtAx5Lws&callback=init"
+                               >
+        let init = () => {
+            console.log('Failed loading the map attemping again in 1 second')
+            setTimeout(1000, init)
+        }
+        </script>
+        <script src="public/gmaps.min.js"></script>
+    </head>
+    <body>
+        <div id="master">
+            <div id="mask"></div>
+            <div id="left">
+                <img id="logo" src="public/logo.svg" alt="">
+                <nav>
+                    <a href="#"><p><i class="fa fa-plus"></i>Add</p></a>
+                    <a href="#"><p><i class="fa fa-eye"></i>View</p></a>
+                </nav>
+            </div>
+            <div id="right">
+                <div id="map"/></div>
+            </div>
+            <div id="popUp">
+                <h1>Add Data</h1>
+                <p>fetch</p>
+            </div>
+        </div>
+        <script src="public/main.js"></script>
+    </body>
 </html>
