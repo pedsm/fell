@@ -1,0 +1,19 @@
+*{
+    font-family: "Open Sans", sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction:row;
+    margin:0px;
+}
+#left {
+    width: 150px;
+    padding:20px;
+}
+
+#right {
+    /* width: 200px; */
+    width: calc(100vw - 150px);
+    height: 100vh;
+}
