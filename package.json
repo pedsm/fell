@@ -25,7 +25,8 @@
   "homepage": "https://github.com/pedsm/fell#readme",
   "dependencies": {
     "electron": "^1.7.9",
-    "gmaps": "^0.4.24"
+    "gmaps": "^0.4.24",
+    "request-promise": "^4.2.2"
   },
   "devDependencies": {
     "eslint": "^4.8.0",
