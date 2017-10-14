@@ -28,5 +28,21 @@ init = () => {
 }
 
 openDialog = () => {
-    
+    mask.style.display = 'block';
+    popUp.style.display = 'block';
 }
+
+closeDialog = () => {
+    mask.style.display = 'none';
+    popUp.style.display = 'none';
+}
+
+addButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    openDialog();
+})
+
+mask.addEventListener('click', (e) => {
+    e.preventDefault();
+    closeDialog();
+})
