@@ -4,6 +4,8 @@ const url = require('url')
 
 let win
 
+process.env.GOOGLE_API_KEY = 'AIzaSyC8AEkXwGA3XqX44eSaQlZTtaCsPkSEmVA'
+
 function createWindow() {
   win = new BrowserWindow({ width: 800, height: 600 })
 
