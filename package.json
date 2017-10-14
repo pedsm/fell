@@ -1,0 +1,28 @@
+{
+  "name": "fell",
+  "version": "1.0.0",
+  "description": "Find every lat/lon",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedsm/fell.git"
+  },
+  "keywords": [
+    "Lat",
+    "Lon",
+    "Electron",
+    "UI"
+  ],
+  "author": "Pedro Mendonca, Tal Rozenman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pedsm/fell/issues"
+  },
+  "homepage": "https://github.com/pedsm/fell#readme",
+  "devDependencies": {
+    "electron": "^1.7.9"
+  }
+}
