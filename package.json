@@ -42,5 +42,12 @@
   },
   "build": {
     "appId": "com.fell"
+  },
+  "build": {
+      "appId": "com.fell",
+      "portable": {
+          "unicode": false,
+          "artifactName": "fellInstaller.v0.1.ext"
+      }
   }
 }
