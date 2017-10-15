@@ -99,7 +99,7 @@ function submit(e) {
                     let parser = new axis()
                     let lats = parser.parse(lat.value, parsed)
                     let lons = parser.parse(lon.value, parsed)
-                    let contents = content.value !== '' ? parser.parse(content.value, parsed) : ''
+                    let contents = parser.parse(content.value, parsed)
                     for (let i = 0; i < lats.length; i++) {
                         if(content.value === '') {
                             addMarker(lats[i], lons[i]);
@@ -109,14 +109,20 @@ function submit(e) {
                     }
                     map.fitZoom()
                 })
-                .catch(e => console.error(e));
+                .catch((e) => {
+                    console.error(e)
+                    alert(e.message)
+                });
         })
-        .catch(e => console.error(e));
+        .catch((e) => {
+            console.error(e)
+            alert(e.message)
+        });
 }
 
 
 function addMarker(lat, lon, content = [{name: 'Point'}]) {
-    // console.log(lat, lon)
+    console.log(lat, lon, content)
     map.addMarker({
         lat,
         lng: lon,
@@ -128,7 +134,10 @@ function addMarker(lat, lon, content = [{name: 'Point'}]) {
 }
 
 function prettyfy(json) {
-    return Object.keys(json)
-        .map(key => `<p><b>${key}:</b> ${json[key]}</p>`)
-        .reduce((a, b) => a + b, '')
+    return `
+    <div class='lowLine'>
+    ${Object.keys(json)
+        .map(key => `<p>${key}:<i> ${json[key]}</i></p>`)
+        .reduce((a, b) => a + b, '')}
+    </div>`
 }

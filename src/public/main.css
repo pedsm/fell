@@ -40,6 +40,10 @@ input {
     padding: 5px;
 }
 
+input:focus {
+    outline-color: #b993d6;
+}
+
 input[type=submit] {
     background: #8ca6db; 
     background: linear-gradient(to right, #8ca6db 0%,#b993d6 100%); 
@@ -120,4 +124,7 @@ input[type=submit] {
     right: 70px;
 }
 
+.lowLine p{
+    margin: 2px
+}
 
