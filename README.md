@@ -18,7 +18,14 @@ One of the major challenges of developing an application like fell is that you c
 
 ![Plane location data](media/data.png)
 
-feel is not only a data exploration tool but it is designed for debugging and API development, what means that it will always try to provide you with as much information as possible.
+fell is not only a data exploration tool but it is designed for debugging and API development, what means that it will always try to provide you with as much information as possible.
+
+### Example queries
+| url | lat | lon | body |
+| --- | --- | ----| ---- |
+| https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?lat=33.433638&lng=-112.008113&fDstL=0&fDstU=100 | acList -> Lat | acList -> Long | acList |
+| https://api.postcodes.io/postcodes/wc2n5du | result -> latitude | result -> longitude | result |
+| https://api.postcodes.io/postcodes/wc2n5du/nearest | result -> latitude | result -> longitude | result |
 
 ### A brief introduction to AxisLang
 
