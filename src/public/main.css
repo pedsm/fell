@@ -59,6 +59,20 @@ input[type=submit] {
     padding: 5px;
 }
 
+#bottom {
+    position: absolute;
+    bottom: 0;
+    width: 150px;
+    text-align: center;
+    letter-spacing: 5px;
+}
+#bottom a {
+    font-size:24px;
+    color:#8ca6db;
+}
+#bottom a:hover {
+    color:#b993d6;
+}
 #right {
     /* width: 200px; */
     width: calc(100vw - 150px);

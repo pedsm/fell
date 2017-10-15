@@ -1,4 +1,5 @@
 const API_KEY = 'AIzaSyBzCZj4CClZrS-BOkmVqD5tmN-poIpivBc'
+const { shell } = require('electron')
 
 axis = require('axislang')
 _ = key => document.getElementById(key)
@@ -11,7 +12,7 @@ const lon = _('lon')
 const content = _('content')
 
 let map
-init = () => { 
+init = () => {
     // eslint-disable-next-line
     const low = navigator.geolocation.getCurrentPosition((position) => {
         map = new GMaps({
@@ -19,7 +20,8 @@ init = () => {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
             width: '100%',
-            height: '100%'
+            height: '100%',
+            maxZoom: 20
         })
         // Current location
         map.addMarker({
@@ -55,12 +57,13 @@ _('searchForm').addEventListener('submit', (e) => {
         callback: (results, status) => {
             if (status === 'OK') {
                 var latlng = results[0].geometry.location;
+                console.log(results[0])
                 map.setCenter(latlng.lat(), latlng.lng());
                 map.addMarker({
                     lat: latlng.lat(),
                     lng: latlng.lng(),
                     infoWindow: {
-                        content: `'${_('searchInput').value}' search result`
+                        content: results[0].formatted_address
                     }
                 });
             }
@@ -72,11 +75,25 @@ mask.addEventListener('click', (e) => {
     closeDialog();
 })
 
-formSubmit.addEventListener('click', (e) => {
+trash.addEventListener('click', (e) => {
+    e.preventDefault()
+    map.removeMarkers()
+})
+
+github.addEventListener('click', (e) => {
+    e.preventDefault();
+    shell.openExternal('https://github.com/pedsm/fell')
+})
+
+formSubmit.addEventListener('click', submit)
+refresh.addEventListener('click', submit)
+    
+function submit(e) {
     e.preventDefault()
     closeDialog();
     fetch(_('url').value)
         .then((response) => {
+            map.removeMarkers()
             response.json()
                 .then(parsed => {
                     let parser = new axis()
@@ -86,15 +103,16 @@ formSubmit.addEventListener('click', (e) => {
                     for (let i = 0; i < lats.length; i++) {
                         addMarker(lats[i], lons[i], contents);
                     }
+                    map.fitZoom()
                 })
                 .catch(e => console.error(e));
         })
         .catch(e => console.error(e));
-})
+}
 
 
 function addMarker(lat, lon, content = 'Point') {
-    console.log(lat, lon)
+    // console.log(lat, lon)
     map.addMarker({
         lat,
         lng: lon,
