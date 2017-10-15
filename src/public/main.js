@@ -8,6 +8,7 @@ const mask = _('mask')
 const formSubmit = _('formSubmit')
 const lat = _('lat')
 const lon = _('lon')
+const content = _('content')
 
 let map
 init = () => { 
@@ -42,9 +43,29 @@ closeDialog = () => {
     popUp.style.display = 'none';
 }
 
-addButton.addEventListener('click', (e) => {
+_('getButton').addEventListener('click', (e) => {
     e.preventDefault();
     openDialog();
+})
+
+_('searchForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    GMaps.geocode({
+        address: _('searchInput').value,
+        callback: (results, status) => {
+            if (status === 'OK') {
+                var latlng = results[0].geometry.location;
+                map.setCenter(latlng.lat(), latlng.lng());
+                map.addMarker({
+                    lat: latlng.lat(),
+                    lng: latlng.lng(),
+                    infoWindow: {
+                        content: `'${_('searchInput').value}' search result`
+                    }
+                });
+            }
+        }
+    });
 })
 
 mask.addEventListener('click', (e) => {
@@ -61,8 +82,9 @@ formSubmit.addEventListener('click', (e) => {
                     let parser = new axis()
                     let lats = parser.parse(lat.value, parsed)
                     let lons = parser.parse(lon.value, parsed)
+                    let contents = parser.parse(content.value, parsed)
                     for (let i = 0; i < lats.length; i++) {
-                        addMarker(lats[i], lons[i]);
+                        addMarker(lats[i], lons[i], contents);
                     }
                 })
                 .catch(e => console.error(e));
@@ -70,14 +92,21 @@ formSubmit.addEventListener('click', (e) => {
         .catch(e => console.error(e));
 })
 
-function addMarker(lat, lon) {
+
+function addMarker(lat, lon, content = 'Point') {
     console.log(lat, lon)
     map.addMarker({
         lat,
         lng: lon,
         title: 'Point',
         infoWindow: {
-            content: 'Point computer'
+            content: prettyfy(content[0])
         }
     })
+}
+
+function prettyfy(json) {
+    return Object.keys(json)
+        .map(key => `<p><b>${key}:</b> ${json[key]}</p>`)
+        .reduce((a, b) => a + b)
 }

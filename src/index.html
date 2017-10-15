@@ -22,11 +22,20 @@
             <div id="left">
                 <img id="logo" src="public/logo.svg" alt="">
                 <nav>
-                    <a id="addButton" href="#"><p><i class="fa fa-plus"></i>Add</p></a>
+                    <a id="getButton" href="#"><p><i class="fa fa-plus"></i>GET</p></a>
                     <a id="viewButton" href="#"><p><i class="fa fa-eye"></i>View</p></a>
                 </nav>
             </div>
             <div id="right">
+                <div id="searchBar">
+                    <form id="searchForm" action="">
+                        <input 
+                          placeholder="Search... "
+                          id="searchInput" 
+                          type="text"
+                        >
+                    </form>
+                </div>
                 <div id="map"/></div>
             </div>
             <div id="popUp">
@@ -37,6 +46,7 @@
                         <input id="url" placeholder="http://api.com" name="url" type="text">
                         <input id="lat" placeholder="Latitude: Axis Syntax" name="url" type="text">
                         <input id="lon" placeholder="Longitude: Axis Syntax" name="url" type="text">
+                        <input id="content" placeholder="Content(optional): Axis Syntax" name="url" type="text">
                     </label> 
                     <br/>
                     <input id="formSubmit" type="submit">
