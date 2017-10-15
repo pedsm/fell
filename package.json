@@ -24,12 +24,13 @@
   },
   "homepage": "https://github.com/pedsm/fell#readme",
   "dependencies": {
-    "electron": "^1.7.9",
+    "axislang": "latest",
+    "electron": "^1.8.1",
     "gmaps": "^0.4.24",
     "request-promise": "^4.2.2"
   },
   "devDependencies": {
-    "eslint": "^4.8.0",
+    "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.0.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",

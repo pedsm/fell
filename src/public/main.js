@@ -1,14 +1,17 @@
 const API_KEY = 'AIzaSyBzCZj4CClZrS-BOkmVqD5tmN-poIpivBc'
 
+axis = require('axislang')
 _ = key => document.getElementById(key)
 // references
 const popUp = _('popUp')
 const mask = _('mask')
 const formSubmit = _('formSubmit')
+const lat = _('lat')
+const lon = _('lon')
 
+let map
 init = () => { 
     // eslint-disable-next-line
-    let map
     const low = navigator.geolocation.getCurrentPosition((position) => {
         map = new GMaps({
             el: '#map',
@@ -54,8 +57,27 @@ formSubmit.addEventListener('click', (e) => {
     fetch(_('url').value)
         .then((response) => {
             response.json()
-                .then(parsed => console.log(parsed))
+                .then(parsed => {
+                    let parser = new axis()
+                    let lats = parser.parse(lat.value, parsed)
+                    let lons = parser.parse(lon.value, parsed)
+                    for (let i = 0; i < lats.length; i++) {
+                        addMarker(lats[i], lons[i]);
+                    }
+                })
                 .catch(e => console.error(e));
         })
         .catch(e => console.error(e));
 })
+
+function addMarker(lat, lon) {
+    console.log(lat, lon)
+    map.addMarker({
+        lat,
+        lng: lon,
+        title: 'Point',
+        infoWindow: {
+            content: 'Point computer'
+        }
+    })
+}
