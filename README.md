@@ -10,13 +10,13 @@ Based on REST requests fell will fetch, parse and display data in two click.
 
 ## AxisLang parsing
 
-![One-Click querying]('media/query.png')
+![One-Click querying](media/query.png)
 
 One of the major challenges of developing an application like fell is that you cannot expect every single form of input. So to achieve the goal of quick and versatile parsing of data structures fell uses [Axis](https://github.com/pedsm/axisLang) syntax, specifically designed to allow fell to perform at its best.
 
 ## All the information you will ever need
 
-![Plane location data]('media/data.png')
+![Plane location data](media/data.png)
 
 feel is not only a data exploration tool but it is designed for debugging and API development, what means that it will always try to provide you with as much information as possible.
 
