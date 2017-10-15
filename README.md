@@ -22,5 +22,5 @@ feel is not only a data exploration tool but it is designed for debugging and AP
 
 ### A brief introduction to AxisLang
 
-Designed specifically to meet the demands of fell Axis a querying syntax for data extraction. The key component of Axis it is ambiguity, Axis is designed to have an ambiguous syntax, as the query is not strictly based on the query but also takes in consideration the data. This means that the same syntax can potentially be reused. More on [axis ambiguity](https://github.com/pedsm/axis)
+Designed specifically to meet the demands of fell Axis a querying syntax for data extraction. The key component of Axis it is ambiguity, Axis is designed to have an ambiguous syntax, as the query is not strictly based on the query but also takes in consideration the data. This means that the same syntax can potentially be reused. More on [axis ambiguity](https://github.com/pedsm/axisLang)
 
