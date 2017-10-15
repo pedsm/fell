@@ -99,9 +99,13 @@ function submit(e) {
                     let parser = new axis()
                     let lats = parser.parse(lat.value, parsed)
                     let lons = parser.parse(lon.value, parsed)
-                    let contents = parser.parse(content.value, parsed)
+                    let contents = content.value !== '' ? parser.parse(content.value, parsed) : ''
                     for (let i = 0; i < lats.length; i++) {
-                        addMarker(lats[i], lons[i], contents);
+                        if(content.value === '') {
+                            addMarker(lats[i], lons[i]);
+                        } else {
+                            addMarker(lats[i], lons[i], contents);
+                        }
                     }
                     map.fitZoom()
                 })
@@ -111,7 +115,7 @@ function submit(e) {
 }
 
 
-function addMarker(lat, lon, content = 'Point') {
+function addMarker(lat, lon, content = [{name: 'Point'}]) {
     // console.log(lat, lon)
     map.addMarker({
         lat,
@@ -126,5 +130,5 @@ function addMarker(lat, lon, content = 'Point') {
 function prettyfy(json) {
     return Object.keys(json)
         .map(key => `<p><b>${key}:</b> ${json[key]}</p>`)
-        .reduce((a, b) => a + b)
+        .reduce((a, b) => a + b, '')
 }
