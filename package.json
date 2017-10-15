@@ -5,7 +5,9 @@
   "main": "src/app.js",
   "scripts": {
     "test": "mocha",
-    "dev": "electron ."
+    "dev": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "repository": {
     "type": "git",
@@ -25,15 +27,19 @@
   "homepage": "https://github.com/pedsm/fell#readme",
   "dependencies": {
     "axislang": "latest",
-    "electron": "^1.8.1",
     "gmaps": "^0.4.24",
     "request-promise": "^4.2.2"
   },
   "devDependencies": {
+    "electron": "^1.8.1",
+    "electron-builder": "^19.13.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.0.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0"
+  },
+  "build": {
+    "appId": "com.fell"
   }
 }
