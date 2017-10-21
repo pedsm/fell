@@ -31,7 +31,6 @@
     "request-promise": "^4.2.2"
   },
   "devDependencies": {
-    "7zip-bin-win": "^2.1.1",
     "electron": "^1.8.1",
     "electron-builder": "^19.13.0",
     "eslint": "^4.9.0",
@@ -40,6 +39,9 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0",
     "pug": "^2.0.0-rc.4"
+  },
+  "optionalDependencies": {
+    "7zip-bin-win": "^2.1.1"
   },
   "build": {
     "appId": "com.fell",
