@@ -11,12 +11,12 @@ function createWindow() {
     win.setMenu(null)
 
     win.loadURL(url.format({
-        pathname: path.join(__dirname, 'index.html'),
+        pathname: path.join(__dirname, 'dist/index.html'),
         protocol: 'file:',
         slashes: true,
     }))
 
-    // win.webContents.openDevTools()
+    win.webContents.openDevTools()
 
     win.on('closed', () => {
         win = null
