@@ -1,7 +1,0 @@
-{
-  "extends": "airbnb",
-  "indent": ["warn", 4]
-  "rules": {
-    "semi": 0
-  }
-}
