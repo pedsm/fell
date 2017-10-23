@@ -43,7 +43,7 @@ export default class App extends React.Component {
 
         return (
             <div style={root}>
-                <Modal visible={true}>
+                <Modal visible={true} title={'Add Data'}>
                     Get request
                 </Modal>
                 <div id="sidebar" style={sidebar}>
