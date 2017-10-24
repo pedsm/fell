@@ -1,13 +1,21 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom' 
 import styles from './styles'
-import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
-import { Menu, Button, Icon, Modal } from 'antd'
+import params from './params.js'
+import Sidebar from './Sidebar.js'
+import enUS from 'antd/lib/locale-provider/en_US';
+import { Gmaps, Marker, InfoWindow, Circle } from 'react-gmaps';
+import { 
+    Input,
+    Button, 
+    Modal,
+    LocaleProvider,
+    Form
+} from 'antd'
 
 export default class App extends React.Component {
     constructor(props) {
         super(props)
-        console.log(styles)
         const low = navigator.geolocation.getCurrentPosition((position) => {
             this.setState({
                 coords: {
@@ -21,49 +29,73 @@ export default class App extends React.Component {
                 lat: 0,
                 lon: 0
             },
-            map: null
+            map: null,
+            dialog: {
+                visible: false,
+                inputs: []
+            }
         }
     }
     
-    start = (map) => {
-        this.setState({ map })
-        console.log(map)
+    // Creates a map reference
+    start = (map) => { this.setState({ map }) }
+
+    // Toggles the modal, does not set content
+    toggleModal = () => {
+        this.setState((prev, props) => {
+            let state = Object.assign(prev)    
+            state.dialog.visible = !prev.dialog.visible
+        })
     }
 
-    handleClick = (e) => {
-
+    // Handles the menu click from the sidebar Item
+    handleClick = (item, key) => {
+        switch(item.key) {
+            case 'get':
+                this.setState((prev) => {
+                    let state = Object.assign(prev)
+                    state.dialog.inputs = [
+                        { name: 'url' },
+                        { name: 'submit' },
+                    ]
+                }, this.toggleModal())
+            break;
+            default:
+                console.warn('unimplemented feature')
+        }
+    }
+    makeForm = (dialog) => {
+        console.log(dialog)
+        if(dialog.inputs.length === 0) {
+            return <span/>
+        }
+        return (
+            <Form style={{ maxWidth: 400 }}>
+                {dialog.inputs.map((a,i) => {
+                    return (
+                        <Form.Item key={i}>
+                            <Input placeholder={a.name} key={i} />
+                        </Form.Item>
+                    )
+                })}
+            </Form>
+        )
     }
 
     render() {
         const { root, sidebar, map } = styles;
-        const params = {
-            v: '3.exp',
-            key: 'AIzaSyAvI1of8u5aDRBmUSDAsLPy6BfUtAx5Lws'
-        } 
 
         return (
             <div style={root}>
-                <Modal visible={true} title={'Add Data'}>
-                    Get request
+                <Modal 
+                    visible={this.state.dialog.visible} 
+                    title={'Add Data'}
+                    onOk={this.toggleModal}
+                    onCancel={this.toggleModal}
+                >
+                    {this.makeForm(this.state.dialog)}
                 </Modal>
-                <div id="sidebar" style={sidebar}>
-                    <img src="img/logo.png" alt="" style={{width: sidebar.width, padding: 20}} />
-                    <Menu>
-                        <Menu.Item onclick={this.handleClick}>
-                            <Icon type="download" />
-                            Get request
-                        </Menu.Item>
-                        <Menu.Item onclick={this.handleClick}>
-                            <Icon type="download" />
-                            Post request
-                        </Menu.Item>
-                        <Menu.Divider />
-                        <Menu.Item onclick={this.handleClick}>
-                            <Icon type="hdd" />
-                            File
-                        </Menu.Item>
-                    </Menu>
-                </div>
+                <Sidebar handleClick={this.handleClick.bind(this)} />
                 <div id="map" style={map}>
                     <Gmaps 
                         params={params}
@@ -82,4 +114,4 @@ export default class App extends React.Component {
 }
 
 // eslint-ignore-next-line
-ReactDOM.render(<App />, document.getElementById("app"));
+ReactDOM.render(<LocaleProvider locale={enUS}><App /></LocaleProvider>, document.getElementById("app"));

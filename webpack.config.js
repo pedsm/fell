@@ -1,5 +1,8 @@
 var webpack = require('webpack');
 var path = require('path');
+var fs = require('fs');
+const lessToJs = require('less-vars-to-js');
+const themeVariables = lessToJs(fs.readFileSync(path.join(__dirname, './src/less/fell.less'), 'utf8'));
 
 var BUILD_DIR = path.resolve(__dirname, 'dist/');
 var APP_DIR = path.resolve(__dirname, 'src/');
@@ -19,13 +22,16 @@ var config = {
             },
             {
                 test: /\.less$/,
-                use: [{
-                    loader: "style-loader" // creates style nodes from JS strings
-                }, {
-                    loader: "css-loader" // translates CSS into CommonJS
-                }, {
-                    loader: "less-loader" // compiles Less to CSS
-                }]
+                use: [
+                    { loader: "style-loader" }, 
+                    { loader: "css-loader" }, 
+                    { loader: "less-loader", 
+                        options: {
+                            modifyVars: themeVariables,
+                            root: path.resolve(__dirname, './')
+                        }
+                    }
+                ]
             }
         ]
     }
