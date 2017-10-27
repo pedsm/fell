@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import styles from './styles'
 import params from './params.js'
 import Sidebar from './Sidebar.js'
+import GetForm from './GetForm.js'
 import enUS from 'antd/lib/locale-provider/en_US';
 import { Gmaps, Marker, InfoWindow, Circle } from 'react-gmaps';
 import { 
@@ -37,7 +38,7 @@ export default class App extends React.Component {
         }
     }
     
-    // Creates a map reference
+    // Stores the map reference on the state
     start = (map) => { this.setState({ map }) }
 
     // Toggles the modal, does not set content
@@ -82,6 +83,10 @@ export default class App extends React.Component {
         )
     }
 
+    addMarkers = (lats, lons) => {
+        // Implement me
+    }
+
     render() {
         const { root, sidebar, map } = styles;
 
@@ -92,8 +97,9 @@ export default class App extends React.Component {
                     title={'Add Data'}
                     onOk={this.toggleModal}
                     onCancel={this.toggleModal}
+                    footer={null}
                 >
-                    {this.makeForm(this.state.dialog)}
+                    <GetForm return={this.addMarkers}/>
                 </Modal>
                 <Sidebar handleClick={this.handleClick.bind(this)} />
                 <div id="map" style={map}>
