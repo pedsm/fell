@@ -68,24 +68,6 @@ export default class App extends React.Component {
         }
     }
 
-    makeForm = (dialog) => {
-        console.log(dialog)
-        if(dialog.inputs.length === 0) {
-            return <span/>
-        }
-        return (
-            <Form style={{ maxWidth: 400 }}>
-                {dialog.inputs.map((a,i) => {
-                    return (
-                        <Form.Item key={i}>
-                            <Input placeholder={a.name} key={i} />
-                        </Form.Item>
-                    )
-                })}
-            </Form>
-        )
-    }
-
     addMarkers = (markers) => {
         console.log(markers)
         this.toggleModal()
