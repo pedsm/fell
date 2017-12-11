@@ -34,7 +34,9 @@ export default class App extends React.Component {
             dialog: {
                 visible: false,
                 inputs: []
-            }
+            },
+            markers: [{lat:52.9, lon:-1.16}],
+            infoWindows: [false],
         }
     }
     
@@ -83,12 +85,51 @@ export default class App extends React.Component {
         )
     }
 
-    addMarkers = (lats, lons) => {
-        // Implement me
+    addMarkers = (markers) => {
+        console.log(markers)
+        this.toggleModal()
+        this.setState((prev, _) => {
+            let state = Object.assign(prev)
+            state.markers = markers
+            state.infoWindows = state.markers.map(_ => false)
+            return state
+        })
     }
 
+    toggleInfo = (index) => {
+        this.setState((prev, props) => {
+            let state = Object.assign(prev)
+            state.infoWindows[index] = !state.infoWindows[index]
+            return state
+        })
+    }
+
+    renderMarkers = () => this.state.markers.map((marker, i) => (
+        <Marker
+            key={i}
+            lat={marker.lat}
+            lng={marker.lon}
+            onClick={() => {this.toggleInfo(i)}}
+        />
+    ))
+    renderInfo = () => this.state.markers.map((marker, i) => {
+        if(this.state.infoWindows[i]) {
+            return (
+                <InfoWindow
+                    key={i}
+                    lat={marker.lat}
+                    lng={marker.lon}
+                    content={marker.content 
+                            ? market.content 
+                            : "Emtpy data point"
+                    }
+                />
+            )
+        }
+    }) 
+
     render() {
-        const { root, sidebar, map } = styles;
+        const { root, sidebar, map } = styles
 
         return (
             <div style={root}>
@@ -112,6 +153,8 @@ export default class App extends React.Component {
                         lng={this.state.coords.lon}
                         onMapCreated={this.start}
                     >
+                        {this.renderMarkers()}
+                        {this.renderInfo()}
                     </Gmaps>
                 </div>
             </div>

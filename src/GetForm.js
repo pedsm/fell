@@ -33,11 +33,17 @@ export default class GetForm extends React.Component {
         axios.get(url)
             .then((res) => {
                 const parser = new axis()
-                console.log(res.data)
                 try {
                     const lats = parser.parse(lat, res.data)
                     const lons = parser.parse(lon, res.data)
-                    this.props.return(lats, lons)
+                    const markers = []
+                    for(let i=0; i < lats.length; i++) {
+                        markers.push({
+                            lat: lats[i],
+                            lon: lons[i]
+                        }) 
+                    }
+                    this.props.return(markers)
                 } catch (e) {
                     console.error(e)
                 }
