@@ -67,6 +67,7 @@ export default class App extends React.Component {
                 console.warn('unimplemented feature')
         }
     }
+
     makeForm = (dialog) => {
         console.log(dialog)
         if(dialog.inputs.length === 0) {
